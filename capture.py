@@ -26,8 +26,7 @@ gi.require_version('PangoCairo', '1.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, Pango, PangoCairo
 import cairo
 
-NAME = 'fastsone capture-LW-ubuntu'
-IDENT = 'fastsone-capture-lw-ubuntu'
+from app_info import NAME, VERSION, IDENT, LEGACY_NAME
 ROOT = Path(__file__).resolve().parent
 CONFIG = Path.home() / '.config' / IDENT
 AUTOSTART = Path.home() / '.config/autostart' / (IDENT + '.desktop')
@@ -1218,7 +1217,7 @@ class App:
         return editor
 
     def pin(self,pix):
-        win=Gtk.Window(title='LW 贴图 · Esc 关闭')
+        win=Gtk.Window(title=NAME+' · 贴图 · Esc 关闭')
         win.set_keep_above(True)
         win.set_default_size(min(800,pix.get_width()),min(600,pix.get_height()))
         area=Gtk.DrawingArea(); win.add(area)
@@ -1243,7 +1242,7 @@ class App:
         d.destroy()
 
     def about(self,*args):
-        self.inform(NAME+' · 2.6.1', '经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
+        self.inform(NAME+' · '+VERSION, '经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
 
 
 def desktop_entry():
@@ -1254,11 +1253,16 @@ def desktop_entry():
 
 def main():
     parser=argparse.ArgumentParser(description=NAME)
-    parser.add_argument('--version',action='version',version=NAME+' 2.6.1')
+    parser.add_argument('--version',action='version',version=NAME+' '+VERSION)
     parser.add_argument('--install',action='store_true',help='安装菜单入口并开启自动启动')
     args=parser.parse_args()
     if args.install:
         launcher=Path.home()/'.local/share/applications'/(IDENT+'.desktop')
+        if AUTOSTART.is_file():
+            contents = AUTOSTART.read_text()
+            old_label = f'\nName={LEGACY_NAME}\n'
+            if old_label in contents:
+                AUTOSTART.write_text(contents.replace(old_label, f'\nName={NAME}\n', 1))
         paths=[launcher]
         if not launcher.exists() and not AUTOSTART.exists():paths.append(AUTOSTART)
         for path in paths:

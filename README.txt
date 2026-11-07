@@ -1,4 +1,4 @@
-fastsone capture-LW-ubuntu 2.6.1 — 经典桌面版
+fastsone capture-ubuntu 2.6.2 — 经典桌面版
 
 面向 Ubuntu 的独立截图软件，参考 FastStone Capture 的经典工作流程：
 紧凑悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图。
@@ -19,7 +19,7 @@ fastsone capture-LW-ubuntu 2.6.1 — 经典桌面版
 去掉无用空白边缘，保留必要边距，支持浅色/深色背景，避免盲目放大所有中文。
 中英文高精度复查模型可单独安装，日常识别在本地运行。
 新机器可选安装：/usr/bin/python3 tools/install_ocr_models.py（下载约28MB，固定版本、SHA-256校验）。
-模型单独存放在 ~/.local/share/fastsone-capture-lw-ubuntu/ocr-models/，不混入源码安装包。
+模型单独存放在 ~/.local/share/fastsone-capture-ubuntu/ocr-models/，不混入源码安装包。
 未安装可选模型时仍能使用系统/个人安装中的普通 Tesseract 模型。
 27张未参与调参的合成验证图：总体字符准确率81.66%→98.21%；
 其中24张单栏96.74%→97.59%，3张两栏（含阅读顺序）38.41%→100%。
@@ -83,10 +83,11 @@ Ubuntu 24.04 x86_64、系统 Python 3.12、GTK3、X11。
   /usr/bin/python3 install.py
 个人安装，无需 sudo。首次安装添加应用菜单并启用登录后启动，升级保留原选择。
 如果旧版仍在运行，安装后请保存截图并退出，再从应用菜单重新打开。
-安装位置：~/.local/share/fastsone-capture-lw-ubuntu/
+新装位置：~/.local/share/fastsone-capture-ubuntu/
+旧版升级会沿用原安装目录、配置目录及自启文件名。卸载时可查看应用菜单启动项的 Exec 字段确认实际位置。
 也可直接运行源文件：/usr/bin/python3 capture.py
 查看版本：/usr/bin/python3 capture.py --version
-应用菜单搜索 fastsone capture-LW-ubuntu 可重新打开。
+应用菜单搜索 fastsone capture-ubuntu 可重新打开。
 
 经典悬浮工具栏
 拖动顶部标题移动位置。按钮依次为：
@@ -156,7 +157,7 @@ Ctrl+Alt+R 打开录像机或停止当前录像。
 
 自动启动
 设置菜单或设置对话框可打开/关闭“登录后自动启动”。
-自动启动项：~/.config/autostart/fastsone-capture-lw-ubuntu.desktop
+自动启动项：~/.config/autostart/fastsone-capture-ubuntu.desktop
 软件与个人设置位于个人目录，无需管理员权限。
 
 验证与边界
@@ -174,15 +175,15 @@ Ctrl+Alt+R 打开录像机或停止当前录像。
 安装：install.py；许可和必要的第三方组件：LICENSE、vendor/。
 回归测试：tests/；使用方法见 tests/README.txt。
 生成干净的软件包：/usr/bin/python3 tools/build.py
-默认输出到软件文件夹旁的 fastsone capture-LW-ubuntu.tar.gz。
+默认输出到软件文件夹旁的 fastsone-capture-ubuntu.tar.gz。
 打包排除缓存、测试产物和临时文件；测试代码保留以便后续维护。
 
 卸载
 先从工具栏菜单退出，删除以下项目（不删除自己保存的截图/录像）：
-~/.local/share/fastsone-capture-lw-ubuntu/
-~/.local/share/applications/fastsone-capture-lw-ubuntu.desktop
-~/.config/autostart/fastsone-capture-lw-ubuntu.desktop
-~/.config/fastsone-capture-lw-ubuntu/
+~/.local/share/fastsone-capture-ubuntu/
+~/.local/share/applications/fastsone-capture-ubuntu.desktop
+~/.config/autostart/fastsone-capture-ubuntu.desktop
+~/.config/fastsone-capture-ubuntu/
 
 组件许可
 源码使用 MIT 许可，见 LICENSE。

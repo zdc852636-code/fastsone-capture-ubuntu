@@ -8,6 +8,10 @@ from pathlib import Path
 import shutil
 import tempfile
 import urllib.request
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app_info import IDENT
 
 REVISION='e12c65a915945e4c28e237a9b52bc4a8f39a0cec'
 FILES={
@@ -20,7 +24,7 @@ FILES={
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--from-directory',type=Path,help='Use previously downloaded files; verify the same checksums')
-    parser.add_argument('--destination',type=Path,default=Path.home()/'.local/share/fastsone-capture-lw-ubuntu/ocr-models')
+    parser.add_argument('--destination',type=Path,default=Path.home()/'.local/share'/IDENT/'ocr-models')
     args=parser.parse_args();args.destination.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.model-install-',dir=args.destination) as temp:
         stage=Path(temp);metadata=[]

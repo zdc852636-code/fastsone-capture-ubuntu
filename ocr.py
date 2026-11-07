@@ -4,6 +4,7 @@ import csv
 from dataclasses import dataclass
 import os
 from pathlib import Path
+from app_info import IDENT
 import re
 import shutil
 import subprocess
@@ -33,7 +34,7 @@ class OCRResult:
 
 def quality_models():
     for folder in (Path(__file__).resolve().parent/'ocr-models',
-                   Path.home()/'.local/share/fastsone-capture-lw-ubuntu/ocr-models'):
+                   Path.home()/'.local/share'/IDENT/'ocr-models'):
         if all((folder/(language+'.traineddata')).is_file() for language in ('chi_sim','eng')):return folder
     return None
 

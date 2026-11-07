@@ -7,20 +7,21 @@ import shutil
 import subprocess
 import sys
 import time
+from app_info import IDENT
 
 source = Path(__file__).resolve().parent
-destination = Path.home() / '.local/share/fastsone-capture-lw-ubuntu'
+destination = Path.home() / '.local/share' / IDENT
 if source != destination:
     destination.mkdir(parents=True, exist_ok=True)
     # Copy dependencies before the entry point; existing processes retain their session.
-    for name in ('customize.py', 'storage.py', 'ocr.py', 'classic_ui.py', 'workspace.py', 'workflows.py', 'panel.py', 'README.txt', 'LICENSE', 'capture.py'):
+    for name in ('app_info.py', 'customize.py', 'storage.py', 'ocr.py', 'classic_ui.py', 'workspace.py', 'workflows.py', 'panel.py', 'README.txt', 'LICENSE', 'capture.py'):
         staged=destination/('.'+name+'.new')
         shutil.copy2(source/name,staged); os.replace(staged,destination/name)
     if (source/'vendor/gi').is_dir():
         shutil.copytree(source/'vendor', destination/'vendor', dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
 subprocess.run(['/usr/bin/python3', str(destination / 'capture.py'), '--install'], check=True)
-logdir = Path.home() / '.config/fastsone-capture-lw-ubuntu'
+logdir = Path.home() / '.config' / IDENT
 logdir.mkdir(parents=True, exist_ok=True)
 # Keep an existing editing session alive; installing must never discard screenshots.
 with (logdir / 'app.lock').open('a') as lock:

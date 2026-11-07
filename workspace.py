@@ -1,11 +1,12 @@
 """Tabbed image workspace with an independent drawing workspace."""
 from gi.repository import Gtk, Gdk
 from classic_ui import style, tool
+from app_info import NAME
 from customize import ZOOM_CHOICES, apply_layout, editor_action
 
 class Workspace(Gtk.Window):
     def __init__(self, app):
-        super().__init__(title='fastsone capture-LW-ubuntu · 编辑器')
+        super().__init__(title=NAME+' · 编辑器')
         self.app=app; self.set_default_size(1180,800); style(self)
         self.connect('delete-event',self.hide_workspace)
         self.connect('key-press-event',self.key)

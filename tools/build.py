@@ -7,10 +7,11 @@ import tempfile
 
 root=Path(__file__).resolve().parents[1]
 target=root.parent/(root.name+'.tar.gz')
-files=[root/name for name in ('capture.py','classic_ui.py','workspace.py','workflows.py',
+files=[root/name for name in ('app_info.py','capture.py','classic_ui.py','workspace.py','workflows.py',
     'panel.py','customize.py','storage.py','ocr.py','install.py','README.txt','README.md','LICENSE')]
 files+=sorted((root/'tests').glob('*.py'))+[root/'tests/README.txt']+sorted((root/'tools').glob('*.py'))
 files+=[root/'vendor/COPYRIGHT-gi-cairo']+sorted((root/'vendor/gi').glob('*.so'))
+files += sorted((root/'docs/images').glob('*.png'))
 fd,name=tempfile.mkstemp(prefix='.lw-build-',suffix='.tar.gz',dir=target.parent)
 os.close(fd)
 try:

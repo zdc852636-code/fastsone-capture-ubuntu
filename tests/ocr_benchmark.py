@@ -9,6 +9,7 @@ import statistics
 import sys
 import time
 import unicodedata
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ocr_fixtures import cases,render
 
 

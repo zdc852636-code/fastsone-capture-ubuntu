@@ -106,15 +106,19 @@ def read_bindings(entries):
 
 def key_page(settings):
     outer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6, margin=10)
-    outer.pack_start(Gtk.Label(label='输入 F6 或 Ctrl+Alt+K。清空可停用该快捷键。', xalign=0), False, False, 0)
+    hint = Gtk.Label(label='输入 F6 或 Ctrl+Alt+K。清空可停用该快捷键。', xalign=0)
+    hint.set_line_wrap(True)
+    outer.pack_start(hint, False, False, 0)
     scroll = Gtk.ScrolledWindow()
-    grid = Gtk.Grid(column_spacing=16, row_spacing=4, margin=4)
+    grid = Gtk.Grid(column_spacing=18, row_spacing=6, margin=6)
     scroll.add(grid)
     outer.pack_start(scroll, True, True, 0)
     entries = {}
     row = 0
     for group, title, definitions in [('hotkeys','全局快捷键',GLOBAL_KEYS), ('editor_keys','编辑器快捷键',EDITOR_KEYS)]:
-        grid.attach(Gtk.Label(label=title, xalign=0), 0, row, 2, 1)
+        heading = Gtk.Label(label=title, xalign=0)
+        heading.get_style_context().add_class('shortcut-group')
+        grid.attach(heading, 0, row, 2, 1)
         row += 1
         for action, definition in definitions.items():
             grid.attach(Gtk.Label(label=definition[0], xalign=0), 0, row, 1, 1)

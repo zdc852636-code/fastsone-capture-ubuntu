@@ -22,6 +22,9 @@ CSS=b'''
 .lw-classic notebook tab:checked { background:#fffdf5; border-top:2px solid #df9b31; }
 .lw-classic entry, .lw-classic spinbutton, .lw-classic combobox { color:#18202b; background:#fff; }
 .lw-classic .status { background:#e6e3da; color:#3f4853; padding:5px; }
+.lw-preferences { font-size: 1.12em; }
+.lw-preferences .shortcut-group { font-weight: bold; margin-top: 6px; }
+.lw-preferences treeview.view { -GtkTreeView-vertical-separator: 6; }
 '''
 
 _styled_screens=set()

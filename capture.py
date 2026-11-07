@@ -1064,7 +1064,12 @@ class App:
         recorder=Recorder(self,rect,getattr(self,'record_audio',False),getattr(self,'record_device',''))
         if recorder.pipeline and not recorder.finalized:self.recorder=recorder
     def preferences(self,*args):
-        d=Gtk.Dialog(title='设置 · '+NAME,transient_for=self.toolbar,modal=True); style(d); d.set_default_size(500,390)
+        d = Gtk.Dialog(title='设置 · '+NAME, transient_for=self.toolbar, modal=True)
+        # Use native GTK foreground/background pairs across the notebook and its controls.
+        d.get_style_context().add_class('lw-preferences')
+        monitor = self.toolbar.get_display().get_monitor_at_window(self.toolbar.get_window())
+        area = monitor.get_workarea()
+        d.set_default_size(min(680, max(1, area.width - 32)), min(580, max(1, area.height - 72)))
         d.add_buttons('取消',Gtk.ResponseType.CANCEL,'应用',Gtk.ResponseType.OK)
         tabs=Gtk.Notebook(); d.get_content_area().pack_start(tabs,True,True,8)
         general=Gtk.Box(orientation=Gtk.Orientation.VERTICAL,spacing=9,margin=14)
@@ -1080,7 +1085,6 @@ class App:
         layout_page = LayoutPage(self.settings)
         tabs.append_page(keys, Gtk.Label(label='快捷键'))
         tabs.append_page(layout_page, Gtk.Label(label='图标布局'))
-        d.set_default_size(560, 500)
         self.configuring = True
         try:
             d.show_all()
@@ -1239,7 +1243,7 @@ class App:
         d.destroy()
 
     def about(self,*args):
-        self.inform(NAME+' · 2.6', '经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
+        self.inform(NAME+' · 2.6.1', '经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
 
 
 def desktop_entry():
@@ -1250,7 +1254,7 @@ def desktop_entry():
 
 def main():
     parser=argparse.ArgumentParser(description=NAME)
-    parser.add_argument('--version',action='version',version=NAME+' 2.6')
+    parser.add_argument('--version',action='version',version=NAME+' 2.6.1')
     parser.add_argument('--install',action='store_true',help='安装菜单入口并开启自动启动')
     args=parser.parse_args()
     if args.install:

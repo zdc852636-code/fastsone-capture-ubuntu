@@ -19,8 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-The third-party component under vendor/ retains its own license; see
-vendor/COPYRIGHT-gi-cairo.
-Optional official OCR models installed separately under ocr-models/ retain
-their Apache-2.0 license; see that directory's LICENSE and source manifest.

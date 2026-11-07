@@ -27,4 +27,4 @@ sudo apt install python3-gi python3-gi-cairo python3-cairo python3-pil gir1.2-gt
 
 ## 许可
 
-项目源码使用 [MIT 许可](LICENSE)。可选 OCR 模型随附各自的许可文件。
+项目源码使用 [MIT 许可](LICENSE)。个人离线安装包可附带 Ubuntu 的 Cairo 适配组件，许可见 [第三方组件声明](vendor/COPYRIGHT-gi-cairo)。单独安装的官方 OCR 模型使用 Apache-2.0 许可，模型目录中附有完整许可和来源清单。

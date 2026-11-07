@@ -1242,7 +1242,7 @@ class App:
         d.destroy()
 
     def about(self,*args):
-        self.inform(NAME+' · '+VERSION, '经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
+        self.inform(NAME+' · '+VERSION, '本项目由作者独立开发，非 FastStone 官方产品。\n\n经典悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图\n\n活动窗口、窗口点选、矩形、手绘、全屏、固定尺寸与滚动拼接。\n滚动截图请只框选可滚动内容，排除固定标题及侧栏。\n录像为 WebM，支持区域、暂停与 PulseAudio 录音。\n\n默认快捷键（可在设置中更改）\nF4 框选识字到剪贴板 · F3 / Ctrl+Alt+A 区域 · Ctrl+Alt+F 全屏 · Ctrl+Alt+W 窗口\nCtrl+Alt+R 停止录像\nPrint 风格快捷键可在设置中更改。\n\nCtrl+S 保存 · Ctrl+C 复制 · Ctrl+V 导入 · Ctrl+Z 撤销\n编辑器关闭时保留未保存标签，退出软件时提示保存。\n\n适用 Ubuntu 24.04 X11。支持本地中英文 OCR（F4）。尚不支持 Wayland、FSC、Office 输出及视频剪辑。')
 
 
 def desktop_entry():

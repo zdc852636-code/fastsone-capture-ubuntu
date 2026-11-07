@@ -1,5 +1,7 @@
 # fastsone capture-ubuntu
 
+**本项目由作者独立开发，非 FastStone 官方产品。** 操作方式参考了 FastStone Capture。
+
 Ubuntu 桌面上的截图、标注、滚动长图、录屏和本地中英文识字工具。按 **F3** 框选一张图，按 **F4** 框选一段文字。截图可以直接进编辑器、剪贴板或指定文件夹，识别出的文字可以直接粘贴。
 
 ![展开的悬浮工具栏，右侧显示当前截图的输出目标](docs/images/toolbar.png)
@@ -99,4 +101,4 @@ F4 使用本机的 Tesseract 识别简体中文和英文。框选区域通过内
 
 开发者可以使用独立测试桌面验证截图、输入和编辑流程，也可以用附带的合成样例复测 OCR。完整操作、卸载步骤及测试命令见 [使用说明](README.txt) 和 [测试说明](tests/README.txt)。
 
-本项目独立实现，界面参考 FastStone Capture 的经典操作习惯。源码采用 [MIT 许可](LICENSE)。个人离线包可附带 Ubuntu 的 Cairo 适配组件，许可见 [组件声明](vendor/COPYRIGHT-gi-cairo)。可选 OCR 模型使用 Apache-2.0 许可，安装后可在模型目录查看来源和许可文件。
+源码采用 [MIT 许可](LICENSE)。个人离线包可附带 Ubuntu 的 Cairo 适配组件，许可见 [组件声明](vendor/COPYRIGHT-gi-cairo)。可选 OCR 模型使用 Apache-2.0 许可，安装后可在模型目录查看来源和许可文件。

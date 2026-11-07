@@ -2,7 +2,7 @@
 from pathlib import Path
 
 NAME = 'fastsone capture-ubuntu'
-VERSION = '2.6.2'
+VERSION = '2.6.3'
 APPLICATION_ID = 'fastsone-capture-ubuntu'
 LEGACY_ID = 'fastsone-capture-lw-ubuntu'
 LEGACY_NAME = 'fastsone capture-LW-ubuntu'

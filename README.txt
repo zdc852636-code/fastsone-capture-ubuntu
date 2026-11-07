@@ -1,6 +1,6 @@
-fastsone capture-ubuntu 2.6.2 — 经典桌面版
+fastsone capture-ubuntu 2.6.3 — 经典桌面版
 
-面向 Ubuntu 的独立截图软件，参考 FastStone Capture 的经典工作流程：
+本项目由作者独立开发，非 FastStone 官方产品。界面参考了 FastStone Capture 的经典工作流程。
 紧凑悬浮工具栏 → 输出目标 → 多标签编辑器 → 绘图。
 使用自主绘制的图标，没有包含 FastStone 的程序或图标素材。
 

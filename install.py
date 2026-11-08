@@ -14,7 +14,7 @@ destination = Path.home() / '.local/share' / IDENT
 if source != destination:
     destination.mkdir(parents=True, exist_ok=True)
     # Copy dependencies before the entry point; existing processes retain their session.
-    for name in ('app_info.py', 'customize.py', 'storage.py', 'ocr.py', 'classic_ui.py', 'workspace.py', 'workflows.py', 'panel.py', 'README.txt', 'LICENSE', 'capture.py'):
+    for name in ('clipboard_history.py', 'app_info.py', 'customize.py', 'storage.py', 'ocr.py', 'classic_ui.py', 'workspace.py', 'workflows.py', 'panel.py', 'README.txt', 'LICENSE', 'capture.py'):
         staged=destination/('.'+name+'.new')
         shutil.copy2(source/name,staged); os.replace(staged,destination/name)
     if (source/'vendor/gi').is_dir():

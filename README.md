@@ -14,7 +14,7 @@ Ubuntu 桌面上的截图、标注、滚动长图、录屏和本地中英文识�
 
 ```sh
 sudo apt update
-sudo apt install git python3-gi python3-gi-cairo python3-cairo python3-pil \
+sudo apt install git copyq python3-gi python3-gi-cairo python3-cairo python3-pil \
   gir1.2-gtk-3.0 libxtst6 gir1.2-gstreamer-1.0 gstreamer1.0-x \
   gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
   tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-eng
@@ -40,6 +40,16 @@ cd fastsone-capture-ubuntu
 | 复制屏幕上的文字 | 按 **F4**，框选文字，等到「文字已复制」提示后按 **Ctrl+V**。按 **Esc** 可以取消框选。 |
 
 截图目标还可以选「到文件…」「到绘图」或「到打印机…」。「到文件…」会逐张询问保存位置，适合每张图需要单独命名的情况。
+
+## 剪贴板历史
+
+点击悬浮工具栏的 **剪贴板历史** 图标，或从编辑器的 **工具 → 剪贴板历史** 打开。窗口列出最近 100 条，可搜索文字预览、查看图片缩略图。按回车、双击或点击「复制选中项」，再回到目标应用按 **Ctrl+V** 粘贴。按 Esc 关闭窗口。
+
+历史由本机 CopyQ 保存，Capture 启动时连接记录服务。新安装使用 100 条存储上限，继续复制时从列表末尾淘汰旧记录。如果已有标签超过 100 条，窗口提供「设置 100 条上限」按钮。CopyQ 的这个设置对每个标签页生效。
+
+想用 **Win+V** 打开时，可在 Capture 的快捷键设置中给「剪贴板历史」填写 `Super+V`。已经通过桌面系统绑定该组合键的用户，也可把现有自定义快捷键的命令指向已安装的 `capture.py --clipboard-history`（使用 `/usr/bin/python3` 启动）。再次调用会关闭同一个历史窗口。
+
+已配置微信输入法文本同步的电脑，可以在窗口底部查看同步状态。手机传来的纯文本和 F4 识别结果都会通过系统剪贴板进入历史。重新复制历史文字后，已有同步服务可将它发往关联设备。图片保存在本机，可在 Capture 窗口预览和复制。
 
 ## 编辑、缩放与导出
 

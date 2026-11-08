@@ -15,6 +15,7 @@ GLOBAL_KEYS = {
     'free': ('手绘截图', '', 'free'), 'fixed': ('固定尺寸截图', '', 'fixed'),
     'scroll': ('滚动截图', '', 'scroll'), 'color': ('屏幕取色', '', 'color'),
     'ruler': ('屏幕标尺', '', 'ruler'),
+    'history': ('剪贴板历史', '', 'history'),
     'record': ('开始或停止录像', '<Control><Alt>r', 'record'),
 }
 EDITOR_KEYS = {
@@ -27,7 +28,7 @@ EDITOR_KEYS = {
 TOOLBARS = {
     'panel': dict(open='打开图片', active='活动窗口', window='点选窗口', region='矩形截图',
                   free='手绘截图', full='全屏截图', scroll='滚动截图', fixed='固定区域',
-                  record='录像', output='输出目标', delay='延迟', settings='设置'),
+                  record='录像', history='剪贴板历史', output='输出目标', delay='延迟', settings='设置'),
     'editor': dict(open='打开', save='保存', draw='绘图', caption='标题', edge='边缘',
                    resize='尺寸', rotate='旋转', crop='裁剪', copy='复制', print='打印',
                    pin='贴图', undo='撤销', redo='重做'),

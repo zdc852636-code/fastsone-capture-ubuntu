@@ -16,7 +16,7 @@ class Workspace(Gtk.Window):
                 ('编辑',[('撤销',lambda *_:self.call('history',True)),('重做',lambda *_:self.call('history',False)),('复制图片',lambda *_:self.call('copy_image')),('绘图工具',lambda *_:self.call('drawing',True)),('裁剪',lambda *_:self.call('activate_tool','crop'))]),
                 ('捕获',[(label,lambda w,mode=mode:app.capture(mode)) for label,mode in [('活动窗口','window'),('窗口 / 对象','object'),('矩形区域','region'),('手绘区域','free'),('整个屏幕','full'),('滚动窗口','scroll'),('固定尺寸区域','fixed')]]),
                 ('图像',[('调整尺寸…',lambda *_:self.call('resize_image')),('顺时针旋转',lambda *_:self.call('rotate_image')),('水平翻转',lambda *_:self.call('flip_image')),('添加标题…',lambda *_:self.call('caption')),('边框与阴影',lambda *_:self.call('edge')),('转为灰度',lambda *_:self.call('grayscale'))]),
-                ('工具',[('屏幕录像机',app.record),('屏幕取色器',lambda *_:app.capture('color')),('屏幕标尺',lambda *_:app.capture('ruler')),('设置',app.preferences)]),('帮助',[('使用说明',app.about)])]
+                ('工具',[('剪贴板历史',app.show_history),('屏幕录像机',app.record),('屏幕取色器',lambda *_:app.capture('color')),('屏幕标尺',lambda *_:app.capture('ruler')),('设置',app.preferences)]),('帮助',[('使用说明',app.about)])]
         for label,items in groups:
             mi=Gtk.MenuItem(label=label); sub=Gtk.Menu(); mi.set_submenu(sub); menu.append(mi)
             for text,fn in items:

@@ -840,7 +840,9 @@ class Hotkeys:
             chord=(e.keycode,e.state & (1|4|8|64))
             if e.type == 2 and chord in self.codes and not self.app.configuring:
                 mode=self.codes[chord]
-                if mode=='record':
+                if mode=='history':
+                    self.app.show_history()
+                elif mode=='record':
                     if self.app.recorder:self.app.recorder.stop()
                     else:self.app.record()
                 else:self.app.capture(mode)
@@ -878,7 +880,7 @@ class App:
                               ('region','捕获矩形区域',lambda *_:self.capture('region')),
                               ('free','捕获手绘区域',lambda *_:self.capture('free')),('full','捕获整个屏幕',lambda *_:self.capture('full')),
                               ('scroll','捕获滚动窗口',lambda *_:self.capture('scroll')),('fixed','捕获固定尺寸区域',lambda *_:self.capture('fixed')),
-                              ('record','屏幕录像机',self.record)]:
+                              ('record','屏幕录像机',self.record), ('history','剪贴板历史',self.show_history)]:
             widget = tool(icon, label, fn, False)
             self.panel_widgets[icon] = widget
             row.pack_start(widget,False,False,0)
@@ -909,7 +911,7 @@ class App:
         settings=Gtk.MenuButton(); settings.add(Icon('settings')); settings.get_style_context().add_class('panel-icon')
         settings.set_tooltip_text('设置与工具'); menu=Gtk.Menu()
         auto=Gtk.CheckMenuItem(label='登录后自动启动'); auto.set_active(AUTOSTART.exists()); auto.connect('toggled',self.autostart); menu.append(auto)
-        for label,fn in [('设置…',self.preferences),('截图识字',lambda *_:self.capture('ocr')),('从剪贴板导入',self.paste_image),('显示编辑器',self.show_workspace),('屏幕取色器',lambda *_:self.capture('color')),('屏幕标尺',lambda *_:self.capture('ruler')),('使用说明',self.about),('退出',self.quit)]:
+        for label,fn in [('设置…',self.preferences),('剪贴板历史',self.show_history),('截图识字',lambda *_:self.capture('ocr')),('从剪贴板导入',self.paste_image),('显示编辑器',self.show_workspace),('屏幕取色器',lambda *_:self.capture('color')),('屏幕标尺',lambda *_:self.capture('ruler')),('使用说明',self.about),('退出',self.quit)]:
             item=Gtk.MenuItem(label=label); item.connect('activate',fn); menu.append(item)
         menu.show_all(); settings.set_popup(menu); row.pack_start(settings,False,False,0)
         self.panel_widgets.update(output=self.output, delay=delaybutton, settings=settings)
@@ -972,6 +974,10 @@ class App:
         self.workspace.show_all()
         for e in self.editors:e.drawing(False)
         self.workspace.present()
+    def show_history(self, *args):
+        subprocess.Popen([sys.executable, str(ROOT/'capture.py'), '--clipboard-history'],
+                         start_new_session=True)
+
     def paste_image(self,*args):
         pix=Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD).wait_for_image()
         if pix:self.edit(pix)
@@ -1255,7 +1261,11 @@ def main():
     parser=argparse.ArgumentParser(description=NAME)
     parser.add_argument('--version',action='version',version=NAME+' '+VERSION)
     parser.add_argument('--install',action='store_true',help='安装菜单入口并开启自动启动')
+    parser.add_argument('--clipboard-history', action='store_true', help='显示或隐藏剪贴板历史')
     args=parser.parse_args()
+    if args.clipboard_history:
+        from clipboard_history import main as history_main
+        return history_main()
     if args.install:
         launcher=Path.home()/'.local/share/applications'/(IDENT+'.desktop')
         if AUTOSTART.is_file():
@@ -1278,9 +1288,11 @@ def main():
     try: fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError: print('软件已运行，请使用悬浮工具栏或截图快捷键。'); return
     app=App()
+    from clipboard_history import start_recording_backend
+    start_recording_backend()
     signal.signal(signal.SIGTERM,lambda *_:Gtk.main_quit())
     signal.signal(signal.SIGINT,lambda *_:Gtk.main_quit())
     Gtk.main()
 
 
-if __name__=='__main__': main()
+if __name__=='__main__': sys.exit(main())

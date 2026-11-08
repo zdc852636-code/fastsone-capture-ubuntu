@@ -21,7 +21,7 @@ def main():
     args=parser.parse_args()
     if not args.xvfb or not args.openbox:sys.exit('需要 Xvfb 和 Openbox：sudo apt install xvfb openbox')
     testdir=Path(__file__).resolve().parent
-    names=args.tests or ['test_storage.py','test_edges.py','test_workflows.py','test_toolbar.py','test_input.py','test_ocr.py','test_ocr_quality.py','test_customization.py']
+    names=args.tests or ['test_storage.py','test_edges.py','test_workflows.py','test_toolbar.py','test_input.py','test_ocr.py','test_ocr_quality.py','test_customization.py', 'test_clipboard_history.py']
     for name in names:
         if '/' in name or not (testdir/name).is_file():sys.exit('Invalid test name: '+name)
     processes=[]

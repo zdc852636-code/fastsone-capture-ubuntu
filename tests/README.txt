@@ -12,7 +12,7 @@ OCR 测试还需已安装 Tesseract 及 chi_sim、eng 模型。
 无需修改 HOME，也不修改用户的自动启动、截图目录和全局快捷键设置。
 不要直接在当前 DISPLAY 下运行单个测试文件。
 
-八组回归：
+九组回归：
 test_storage.py：写入失败、已有文件保护、透明背景、损坏设置、缓存及录像错误。
 test_edges.py：关闭/取消保存、输入框快捷键、绘制边界、滚动及设置异常。
 test_workflows.py：编辑导出、六种截图、滚动拼接、真实录屏和视频解码。
@@ -42,3 +42,5 @@ OCR质量回归：test_ocr_quality.py 验证双栏顺序、空图及复查失败
 基准程序只生成合成图，不连接或截取用户桌面；输出逐图结果JSON、CSV和样例PNG。
 
 个性化设置回归 test_customization.py 验证实际 Ctrl＋滚轮缩放、设置界面的快捷键和图标排序、隐藏、冲突及保存失败恢复。
+
+剪贴板测试需要 CopyQ 7+ 和 dbus-run-session。test_clipboard_history.py 使用独立的桌面、D-Bus和临时配置，验证100条淘汰、记录重排、图文复制、搜索、窗口切换和重启恢复。

@@ -65,6 +65,9 @@ class Icon(Gtk.DrawingArea):
             if k=='fixed': rect(7,10,10,7,(.95,.9,.68)); line([(8,13),(16,13)])
             if k=='record':
                 c.set_source_rgb(.83,.12,.1); c.arc(12,14,4,0,math.tau); c.fill()
+        elif k=='history':
+            rect(4,4,16,18,(.9,.95,.99)); rect(8,2,8,4,(.55,.69,.8))
+            for y in (10,14,18):line([(8,y),(16,y)])
         elif k=='open':
             rect(4,5,10,11,(.9,.92,.95)); c.move_to(2,11); c.line_to(22,11); c.line_to(18,21); c.line_to(3,21); c.close_path(); c.set_source_rgb(.94,.7,.25); c.fill_preserve(); c.set_source_rgb(.5,.37,.1); c.stroke()
         elif k=='save':
